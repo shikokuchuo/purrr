@@ -13,7 +13,7 @@ they share the same notion of "parallel" as base::pmax() and base::pmin().'><met
 
     <a class="navbar-brand me-2" href="../index.html">purrr</a>
 
-    <small class="nav-text text-danger me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="In-development version">1.0.4.9000</small>
+    <small class="nav-text text-danger me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="In-development version">1.1.0.9000</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -30,6 +30,7 @@ they share the same notion of "parallel" as base::pmax() and base::pmin().'><met
 <li class="nav-item dropdown">
   <button class="nav-link dropdown-toggle" type="button" id="dropdown-news" data-bs-toggle="dropdown" aria-expanded="false" aria-haspopup="true">News</button>
   <ul class="dropdown-menu" aria-labelledby="dropdown-news"><li><h6 class="dropdown-header" data-toc-skip>Releases</h6></li>
+    <li><a class="external-link dropdown-item" href="https://www.tidyverse.org/blog/2025/07/purrr-1-1-0-parallel/">Version 1.1.0</a></li>
     <li><a class="external-link dropdown-item" href="https://www.tidyverse.org/blog/2022/12/purrr-1-0-0/">Version 1.0.0</a></li>
     <li><a class="external-link dropdown-item" href="https://www.tidyverse.org/articles/2019/02/purrr-0-3-0/">Version 0.3.0</a></li>
     <li><a class="external-link dropdown-item" href="https://www.tidyverse.org/articles/2017/08/purrr-0.2.3/">Version 0.2.3</a></li>
@@ -60,19 +61,19 @@ they share the same notion of "parallel" as <code><a href="https://rdrr.io/r/bas
 
     <div class="section level2">
     <h2 id="ref-usage">Usage<a class="anchor" aria-label="anchor" href="#ref-usage"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">pmap</span><span class="op">(</span><span class="va">.l</span>, <span class="va">.f</span>, <span class="va">...</span>, .parallel <span class="op">=</span> <span class="cn">FALSE</span>, .progress <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">pmap</span><span class="op">(</span><span class="va">.l</span>, <span class="va">.f</span>, <span class="va">...</span>, .progress <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
 <span></span>
-<span><span class="fu">pmap_lgl</span><span class="op">(</span><span class="va">.l</span>, <span class="va">.f</span>, <span class="va">...</span>, .parallel <span class="op">=</span> <span class="cn">FALSE</span>, .progress <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
+<span><span class="fu">pmap_lgl</span><span class="op">(</span><span class="va">.l</span>, <span class="va">.f</span>, <span class="va">...</span>, .progress <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
 <span></span>
-<span><span class="fu">pmap_int</span><span class="op">(</span><span class="va">.l</span>, <span class="va">.f</span>, <span class="va">...</span>, .parallel <span class="op">=</span> <span class="cn">FALSE</span>, .progress <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
+<span><span class="fu">pmap_int</span><span class="op">(</span><span class="va">.l</span>, <span class="va">.f</span>, <span class="va">...</span>, .progress <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
 <span></span>
-<span><span class="fu">pmap_dbl</span><span class="op">(</span><span class="va">.l</span>, <span class="va">.f</span>, <span class="va">...</span>, .parallel <span class="op">=</span> <span class="cn">FALSE</span>, .progress <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
+<span><span class="fu">pmap_dbl</span><span class="op">(</span><span class="va">.l</span>, <span class="va">.f</span>, <span class="va">...</span>, .progress <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
 <span></span>
-<span><span class="fu">pmap_chr</span><span class="op">(</span><span class="va">.l</span>, <span class="va">.f</span>, <span class="va">...</span>, .parallel <span class="op">=</span> <span class="cn">FALSE</span>, .progress <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
+<span><span class="fu">pmap_chr</span><span class="op">(</span><span class="va">.l</span>, <span class="va">.f</span>, <span class="va">...</span>, .progress <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
 <span></span>
-<span><span class="fu">pmap_vec</span><span class="op">(</span><span class="va">.l</span>, <span class="va">.f</span>, <span class="va">...</span>, .ptype <span class="op">=</span> <span class="cn">NULL</span>, .parallel <span class="op">=</span> <span class="cn">FALSE</span>, .progress <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
+<span><span class="fu">pmap_vec</span><span class="op">(</span><span class="va">.l</span>, <span class="va">.f</span>, <span class="va">...</span>, .ptype <span class="op">=</span> <span class="cn">NULL</span>, .progress <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
 <span></span>
-<span><span class="fu">pwalk</span><span class="op">(</span><span class="va">.l</span>, <span class="va">.f</span>, <span class="va">...</span>, .parallel <span class="op">=</span> <span class="cn">FALSE</span>, .progress <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></code></pre></div>
+<span><span class="fu">pwalk</span><span class="op">(</span><span class="va">.l</span>, <span class="va">.f</span>, <span class="va">...</span>, .progress <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div class="section level2">
@@ -93,9 +94,11 @@ to be called once for each row.</p></dd>
 <dd><p>A function, specified in one of the following ways:</p><ul><li><p>A named function.</p></li>
 <li><p>An anonymous function, e.g. <code>\(x, y, z) x + y / z</code> or
 <code>function(x, y, z) x + y / z</code></p></li>
-<li><p>A formula, e.g. <code>~ ..1 + ..2 / ..3</code>. This syntax is not recommended as
-you can only refer to arguments by position.</p></li>
-</ul></dd>
+<li><p>A formula, e.g. <code>~ ..1 + ..2 / ..3</code>. No longer recommended.</p></li>
+</ul><p><a href="https://lifecycle.r-lib.org/articles/stages.html#experimental" class="external-link"><img src="figures/lifecycle-experimental.svg" alt="[Experimental]"></a></p>
+<p>Wrap a function with <code><a href="in_parallel.html">in_parallel()</a></code> to declare that it should be performed
+in parallel. See <code><a href="in_parallel.html">in_parallel()</a></code> for more details.
+Use of <code>...</code> is not permitted in this context.</p></dd>
 
 
 <dt id="arg--">...<a class="anchor" aria-label="anchor" href="#arg--"></a></dt>
@@ -108,18 +111,6 @@ you can only refer to arguments by position.</p></li>
 <span><span class="va">x</span> <span class="op">|&gt;</span> <span class="fu"><a href="../reference/map.html">map</a></span><span class="op">(</span>\<span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="fu">f</span><span class="op">(</span><span class="va">x</span>, <span class="fl">1</span>, <span class="fl">2</span>, collapse <span class="op">=</span> <span class="st">","</span><span class="op">)</span><span class="op">)</span></span></code></pre><p></p></div>
 <p>This makes it easier to understand which arguments belong to which
 function and will tend to yield better error messages.</p></dd>
-
-
-<dt id="arg--parallel">.parallel<a class="anchor" aria-label="anchor" href="#arg--parallel"></a></dt>
-<dd><p><a href="https://lifecycle.r-lib.org/articles/stages.html#experimental" class="external-link"><img src="figures/lifecycle-experimental.svg" alt="[Experimental]"></a> Whether to map in
-parallel. Use <code>TRUE</code> to parallelize using the <a href="https://CRAN.R-project.org/package=mirai" class="external-link"><span class="pkg">mirai</span></a> package.</p><ul><li><p>Set up parallelization in your session beforehand using
-<code><a href="https://mirai.r-lib.org/reference/daemons.html" class="external-link">mirai::daemons()</a></code>.</p></li>
-<li><p>Non-package functions are auto-crated for sharing with parallel
-processes. You may <code><a href="https://rdrr.io/pkg/carrier/man/crate.html" class="external-link">carrier::crate()</a></code> your function explicitly if you need
-to supply additional objects along with your function.</p></li>
-<li><p>Use of <code>...</code> is not permitted in this context, <code><a href="https://rdrr.io/pkg/carrier/man/crate.html" class="external-link">carrier::crate()</a></code> an
-anonymous function instead.</p></li>
-</ul><p>See <a href="parallelization.html">parallelization</a> for more details.</p></dd>
 
 
 <dt id="arg--progress">.progress<a class="anchor" aria-label="anchor" href="#arg--progress"></a></dt>
@@ -264,7 +255,7 @@ use in a pipe. The return value of <code>.f()</code> is ignored.</p></li>
 </div>
 
 <div class="pkgdown-footer-right">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.2.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.3.</p>
 </div>
 
   </div></footer></body></html>

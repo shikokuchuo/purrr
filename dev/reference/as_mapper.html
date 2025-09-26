@@ -13,7 +13,7 @@ rlang::as_function()."><meta property="og:image" content="https://purrr.tidyvers
 
     <a class="navbar-brand me-2" href="../index.html">purrr</a>
 
-    <small class="nav-text text-danger me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="In-development version">1.0.4.9000</small>
+    <small class="nav-text text-danger me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="In-development version">1.1.0.9000</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -30,6 +30,7 @@ rlang::as_function()."><meta property="og:image" content="https://purrr.tidyvers
 <li class="nav-item dropdown">
   <button class="nav-link dropdown-toggle" type="button" id="dropdown-news" data-bs-toggle="dropdown" aria-expanded="false" aria-haspopup="true">News</button>
   <ul class="dropdown-menu" aria-labelledby="dropdown-news"><li><h6 class="dropdown-header" data-toc-skip>Releases</h6></li>
+    <li><a class="external-link dropdown-item" href="https://www.tidyverse.org/blog/2025/07/purrr-1-1-0-parallel/">Version 1.1.0</a></li>
     <li><a class="external-link dropdown-item" href="https://www.tidyverse.org/blog/2022/12/purrr-1-0-0/">Version 1.0.0</a></li>
     <li><a class="external-link dropdown-item" href="https://www.tidyverse.org/articles/2019/02/purrr-0-3-0/">Version 0.3.0</a></li>
     <li><a class="external-link dropdown-item" href="https://www.tidyverse.org/articles/2017/08/purrr-0.2.3/">Version 0.2.3</a></li>
@@ -79,14 +80,8 @@ generic. The default method forwards its arguments to
 <dl><dt id="arg--f">.f<a class="anchor" aria-label="anchor" href="#arg--f"></a></dt>
 <dd><p>A function, formula, or vector (not necessarily atomic).</p>
 <p>If a <strong>function</strong>, it is used as is.</p>
-<p>If a <strong>formula</strong>, e.g. <code>~ .x + 2</code>, it is converted to a function. There
-are three ways to refer to the arguments:</p><ul><li><p>For a single argument function, use <code>.</code></p></li>
-<li><p>For a two argument function, use <code>.x</code> and <code>.y</code></p></li>
-<li><p>For more arguments, use <code>..1</code>, <code>..2</code>, <code>..3</code> etc</p></li>
-</ul><p>This syntax allows you to create very compact anonymous
-functions. Note that formula functions conceptually take dots
-(that's why you can use <code>..1</code> etc). They silently ignore
-additional arguments that are not used in the formula expression.</p>
+<p>If a <strong>formula</strong>, e.g. <code>~ .x + 2</code>, it is converted to a function.
+No longer recommended.</p>
 <p>If <strong>character vector</strong>, <strong>numeric vector</strong>, or <strong>list</strong>, it is
 converted to an extractor function. Character vectors index by
 name and numeric vectors index by position; use a list to index
@@ -111,35 +106,35 @@ value is absent (does not exist) or empty (has length 0).
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="fu">as_mapper</span><span class="op">(</span>\<span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="va">x</span> <span class="op">+</span> <span class="fl">1</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> function (x) </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> x + 1</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> &lt;environment: 0x55b36ce5d598&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> &lt;environment: 0x55b14b938c00&gt;</span>
 <span class="r-in"><span><span class="fu">as_mapper</span><span class="op">(</span><span class="fl">1</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> function (x, ...) </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> pluck_raw(x, list(1), .default = NULL)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> &lt;environment: 0x55b36ce05488&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> &lt;environment: 0x55b14b8eb8d8&gt;</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="fu">as_mapper</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"a"</span>, <span class="st">"b"</span>, <span class="st">"c"</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> function (x, ...) </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> pluck_raw(x, list("a", "b", "c"), .default = NULL)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> &lt;environment: 0x55b36ccefce8&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> &lt;environment: 0x55b14b87edc8&gt;</span>
 <span class="r-in"><span><span class="co"># Equivalent to function(x) x[["a"]][["b"]][["c"]]</span></span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="fu">as_mapper</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="fl">1</span>, <span class="st">"a"</span>, <span class="fl">2</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> function (x, ...) </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> pluck_raw(x, list(1, "a", 2), .default = NULL)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> &lt;environment: 0x55b36ca1b5f8&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> &lt;environment: 0x55b14b7b2258&gt;</span>
 <span class="r-in"><span><span class="co"># Equivalent to function(x) x[[1]][["a"]][[2]]</span></span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="fu">as_mapper</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fu"><a href="attr_getter.html">attr_getter</a></span><span class="op">(</span><span class="st">"a"</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> function (x, ...) </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> pluck_raw(x, list(1, function (x) </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> attr(x, attr, exact = TRUE)), .default = NULL)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> &lt;environment: 0x55b36c99a330&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> &lt;environment: 0x55b14b741940&gt;</span>
 <span class="r-in"><span><span class="co"># Equivalent to function(x) attr(x[[1]], "a")</span></span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="fu">as_mapper</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"a"</span>, <span class="st">"b"</span>, <span class="st">"c"</span><span class="op">)</span>, .default <span class="op">=</span> <span class="cn">NA</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> function (x, ...) </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> pluck_raw(x, list("a", "b", "c"), .default = NA)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> &lt;environment: 0x55b36c7ba900&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> &lt;environment: 0x55b14b638748&gt;</span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>
@@ -153,7 +148,7 @@ value is absent (does not exist) or empty (has length 0).
 </div>
 
 <div class="pkgdown-footer-right">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.2.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.3.</p>
 </div>
 
   </div></footer></body></html>
