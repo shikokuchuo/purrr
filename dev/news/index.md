@@ -2,6 +2,56 @@
 
 ## purrr (development version)
 
+- [`pmap()`](https://purrr.tidyverse.org/dev/reference/pmap.md) now
+  passes `user_env` to the vctrs compatibility helpers, fixing a
+  spurious “argument `user_env` is missing” error when given a pairlist.
+- All functions and arguments deprecated in purrr 1.0.0 (released
+  December 2022) are now defunct, so calling them throws an error. They
+  will be removed in a future release. This includes `cross*()`,
+  [`flatten_raw()`](https://purrr.tidyverse.org/dev/reference/map_raw.md),
+  [`invoke()`](https://purrr.tidyverse.org/dev/reference/invoke.md),
+  [`invoke_map()`](https://purrr.tidyverse.org/dev/reference/invoke.md)
+  (and its typed variants except
+  [`invoke_map_df()`](https://purrr.tidyverse.org/dev/reference/invoke.md)
+  and
+  [`invoke_map_dfc()`](https://purrr.tidyverse.org/dev/reference/invoke.md)),
+  `lift_*()`, `*map*_raw()`,
+  [`prepend()`](https://purrr.tidyverse.org/dev/reference/prepend.md),
+  [`rbernoulli()`](https://purrr.tidyverse.org/dev/reference/rbernoulli.md),
+  [`rdunif()`](https://purrr.tidyverse.org/dev/reference/rdunif.md),
+  [`rerun()`](https://purrr.tidyverse.org/dev/reference/rerun.md),
+  [`splice()`](https://purrr.tidyverse.org/dev/reference/splice.md),
+  [`update_list()`](https://purrr.tidyverse.org/dev/reference/update_list.md),
+  [`vec_depth()`](https://purrr.tidyverse.org/dev/reference/pluck_depth.md),
+  [`when()`](https://purrr.tidyverse.org/dev/reference/when.md), and
+  using [`vars()`](https://dplyr.tidyverse.org/reference/vars.html) in
+  `.at`.
+- [`list_along()`](https://purrr.tidyverse.org/dev/reference/along.md),
+  [`invoke_map_df()`](https://purrr.tidyverse.org/dev/reference/invoke.md),
+  and
+  [`invoke_map_dfc()`](https://purrr.tidyverse.org/dev/reference/invoke.md)
+  now always warn about their deprecation, as does supplying pairlists,
+  calls, or expressions to
+  [`map()`](https://purrr.tidyverse.org/dev/reference/map.md) and
+  friends.
+- All [`map()`](https://purrr.tidyverse.org/dev/reference/map.md)
+  functions now have less overhead, particularly on unclassed vectors.
+  This means that they should run faster when `.f` itself is very fast,
+  like with the common cases of `map(x, names)` or `map_lgl(x, is.null)`
+  ([\#1263](https://github.com/tidyverse/purrr/issues/1263), with an
+  assist from [@ErdaradunGaztea](https://github.com/ErdaradunGaztea)).
+  As a side effect, `.f` is now called as `.f(.x_i, ...)` (with `...`
+  omitted when empty) rather than `.f(.x[[i]], ...)`, which affects code
+  that uses [`substitute()`](https://rdrr.io/r/base/substitute.html),
+  [`match.call()`](https://rdrr.io/r/base/match.call.html), or
+  [`sys.call()`](https://rdrr.io/r/base/sys.parent.html).
+- [`in_parallel()`](https://purrr.tidyverse.org/dev/reference/in_parallel.md)
+  is no longer experimental.
+- [`in_parallel()`](https://purrr.tidyverse.org/dev/reference/in_parallel.md)
+  now accepts existing functions, so `.f` no longer needs to be defined
+  inside the call, e.g. `in_parallel(sum)` or
+  `in_parallel(fun, helper = helper)`.
+
 ## purrr 1.2.2
 
 CRAN release: 2026-04-10

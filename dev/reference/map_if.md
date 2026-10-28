@@ -50,8 +50,6 @@ map_at(.x, .at, .f, ..., .progress = FALSE)
     `.default` to set a default value if the indexed element is `NULL`
     or does not exist.
 
-  **\[experimental\]**
-
   Wrap a function with
   [`in_parallel()`](https://purrr.tidyverse.org/dev/reference/in_parallel.md)
   to declare that it should be performed in parallel. See
@@ -83,10 +81,6 @@ map_at(.x, .at, .f, ..., .progress = FALSE)
   A logical, integer, or character vector giving the elements to select.
   Alternatively, a function that takes a vector of names, and returns a
   logical, integer, or character vector of elements to select.
-
-  **\[deprecated\]**: if the tidyselect package is installed, you can
-  use [`vars()`](https://dplyr.tidyverse.org/reference/vars.html) and
-  tidyselect helpers to select elements.
 
 - .progress:
 
