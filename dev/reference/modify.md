@@ -27,15 +27,15 @@ the `modify()` family always returns the same type as the input object.
 ## Usage
 
 ``` r
-modify(.x, .f, ...)
+modify(.x, .f, ..., .progress = FALSE)
 
 modify_if(.x, .p, .f, ..., .else = NULL)
 
 modify_at(.x, .at, .f, ...)
 
-modify2(.x, .y, .f, ...)
+modify2(.x, .y, .f, ..., .progress = FALSE)
 
-imodify(.x, .f, ...)
+imodify(.x, .f, ..., .progress = FALSE)
 ```
 
 ## Arguments
@@ -65,14 +65,37 @@ imodify(.x, .f, ...)
   This makes it easier to understand which arguments belong to which
   function and will tend to yield better error messages.
 
+- .progress:
+
+  Whether to show a progress bar. Use `TRUE` to turn on a basic progress
+  bar, use a string to give it a name, or see
+  [progress_bars](https://purrr.tidyverse.org/dev/reference/progress_bars.md)
+  for more details.
+
 - .p:
 
-  A single predicate function, a formula describing such a predicate
-  function, or a logical vector of the same length as `.x`.
-  Alternatively, if the elements of `.x` are themselves lists of
-  objects, a string indicating the name of a logical element in the
-  inner lists. Only those elements where `.p` evaluates to `TRUE` will
-  be modified.
+  A predicate function specified in one of the following ways:
+
+  - A named function, e.g. `is.character`.
+
+  - An anonymous function, e.g. `\(x) all(x < 0)` or
+    `function(x) all(x < 0)`.
+
+  - A formula, e.g. `~ all(.x < 0)`. Use `.x` to refer to the first
+    argument. No longer recommended.
+
+  - A logical vector of the same length as `.x`.
+
+  - A string, if the elements of `.x` are themselves lists of objects,
+    giving the name of a logical element in the inner lists.
+
+  Only those elements where `.p` evaluates to `TRUE` will be modified.
+
+  Wrap a function with
+  [`in_parallel()`](https://purrr.tidyverse.org/dev/reference/in_parallel.md)
+  to declare that it should be performed in parallel. See
+  [`in_parallel()`](https://purrr.tidyverse.org/dev/reference/in_parallel.md)
+  for more details. Use of `...` is not permitted in this context.
 
 - .else:
 

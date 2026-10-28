@@ -7,11 +7,11 @@
 ## Usage
 
 ``` r
-keep(.x, .p, ...)
+keep(.x, .p, ..., .progress = FALSE)
 
-discard(.x, .p, ...)
+discard(.x, .p, ..., .progress = FALSE)
 
-compact(.x, .p = identity)
+compact(.x, .p = identity, .progress = FALSE)
 ```
 
 ## Arguments
@@ -33,9 +33,22 @@ compact(.x, .p = identity)
   - A formula, e.g. `~ all(.x < 0)`. Use `.x` to refer to the first
     argument. No longer recommended.
 
+  Wrap a function with
+  [`in_parallel()`](https://purrr.tidyverse.org/dev/reference/in_parallel.md)
+  to declare that it should be performed in parallel. See
+  [`in_parallel()`](https://purrr.tidyverse.org/dev/reference/in_parallel.md)
+  for more details. Use of `...` is not permitted in this context.
+
 - ...:
 
   Additional arguments passed on to `.p`.
+
+- .progress:
+
+  Whether to show a progress bar. Use `TRUE` to turn on a basic progress
+  bar, use a string to give it a name, or see
+  [progress_bars](https://purrr.tidyverse.org/dev/reference/progress_bars.md)
+  for more details.
 
 ## Details
 

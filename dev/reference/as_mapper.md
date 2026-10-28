@@ -54,33 +54,33 @@ as_mapper(.f, ..., .null, .default = NULL)
 as_mapper(\(x) x + 1)
 #> function (x) 
 #> x + 1
-#> <environment: 0x6437143b8458>
+#> <environment: 0x5813ceb63b68>
 as_mapper(1)
 #> function (x, ...) 
 #> pluck_raw(x, list(1), .default = NULL)
-#> <environment: 0x6437142e8138>
+#> <environment: 0x5813ce69c3d8>
 
 as_mapper(c("a", "b", "c"))
 #> function (x, ...) 
 #> pluck_raw(x, list("a", "b", "c"), .default = NULL)
-#> <environment: 0x6437141f7678>
+#> <environment: 0x5813ce64f430>
 # Equivalent to function(x) x[["a"]][["b"]][["c"]]
 
 as_mapper(list(1, "a", 2))
 #> function (x, ...) 
 #> pluck_raw(x, list(1, "a", 2), .default = NULL)
-#> <environment: 0x6437138010f8>
+#> <environment: 0x5813ce4e1948>
 # Equivalent to function(x) x[[1]][["a"]][[2]]
 
 as_mapper(list(1, attr_getter("a")))
 #> function (x, ...) 
 #> pluck_raw(x, list(1, function (x) 
 #> attr(x, attr, exact = TRUE)), .default = NULL)
-#> <environment: 0x6437137a1248>
+#> <environment: 0x5813ce458248>
 # Equivalent to function(x) attr(x[[1]], "a")
 
 as_mapper(c("a", "b", "c"), .default = NA)
 #> function (x, ...) 
 #> pluck_raw(x, list("a", "b", "c"), .default = NA)
-#> <environment: 0x6437136eb5b0>
+#> <environment: 0x5813ce3dc538>
 ```
