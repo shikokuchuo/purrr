@@ -87,9 +87,6 @@ of length 1 will be recycled to the length of the other.</p></dd>
 <dt id="arg--f">.f<a class="anchor" aria-label="anchor" href="#arg--f"></a></dt>
 <dd><p>A function, specified in one of the following ways:</p><ul><li><p>A named function.</p></li>
 <li><p>An anonymous function, e.g. <code>\(x, y) x + y</code> or <code>function(x, y) x + y</code>.</p></li>
-<li><p>A formula, e.g. <code>~ .x + .y</code>. Use <code>.x</code> to refer to the current
-element of <code>x</code> and <code>.y</code> to refer to the current element of <code>y</code>.
-No longer recommended.</p></li>
 </ul><p>Wrap a function with <code><a href="in_parallel.html">in_parallel()</a></code> to declare that it should be performed
 in parallel. See <code><a href="in_parallel.html">in_parallel()</a></code> for more details.
 Use of <code>...</code> is not permitted in this context.</p></dd>
@@ -134,6 +131,13 @@ use in a pipe. The return value of <code>.f()</code> is ignored.</p></li>
 </ul><p>Any errors thrown by <code>.f</code> will be wrapped in an error with class
 <a href="purrr_error_indexed.html">purrr_error_indexed</a>.</p>
     </div>
+    <div class="section level2">
+    <h2 id="details">Details<a class="anchor" aria-label="anchor" href="#details"></a></h2>
+    <p><code>.f</code> is called once for each position in <code>.x</code> and <code>.y</code>, as
+<code>.f(.x[[1]], .y[[1]], ...), .f(.x[[2]], .y[[2]], ...), ...</code>.</p>
+<p>Note in particular that:</p><ul><li><p><code>.x</code> and <code>.y</code> are subset with <code>[[</code>, using the <code>[[</code> method if they have one.</p></li>
+<li><p>The names of <code>.x</code> and <code>.y</code> are not passed to <code>.f</code>.</p></li>
+</ul></div>
     <div class="section level2">
     <h2 id="see-also">See also<a class="anchor" aria-label="anchor" href="#see-also"></a></h2>
     <div class="dont-index"><p>Other map variants:

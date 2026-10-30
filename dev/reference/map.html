@@ -119,8 +119,6 @@ the input <code>.x</code>.</p></li>
 <dt id="arg--f">.f<a class="anchor" aria-label="anchor" href="#arg--f"></a></dt>
 <dd><p>A function, specified in one of the following ways:</p><ul><li><p>A named function, e.g. <code>mean</code>.</p></li>
 <li><p>An anonymous function, e.g. <code>\(x) x + 1</code> or <code>function(x) x + 1</code>.</p></li>
-<li><p>A formula, e.g. <code>~ .x + 1</code>. Use <code>.x</code> to refer to the first
-argument. No longer recommended.</p></li>
 <li><p>A string, integer, or list, e.g. <code>"idx"</code>, <code>1</code>, or <code>list("idx", 1)</code> which
 are shorthand for <code>\(x) pluck(x, "idx")</code>, <code>\(x) pluck(x, 1)</code>, and
 <code>\(x) pluck(x, "idx", 1)</code> respectively. Optionally supply <code>.default</code> to
@@ -169,6 +167,15 @@ use in a pipe. The return value of <code>.f()</code> is ignored.</p></li>
 </ul><p>Any errors thrown by <code>.f</code> will be wrapped in an error with class
 <a href="purrr_error_indexed.html">purrr_error_indexed</a>.</p>
     </div>
+    <div class="section level2">
+    <h2 id="details">Details<a class="anchor" aria-label="anchor" href="#details"></a></h2>
+    <p><code>.f</code> is called once for each element of <code>.x</code>, as
+<code>.f(.x[[1]], ...), .f(.x[[2]], ...), ...</code>.</p>
+<p>Note in particular that:</p><ul><li><p><code>.x</code> is subset with <code>[[</code>, using the <code>[[</code> method if <code>x</code> has one.</p></li>
+<li><p>The names of <code>.x</code> are not passed to <code>.f</code>. If you need them, use
+<code><a href="imap.html">imap()</a></code>.</p></li>
+<li><p>If <code>.f</code> is a function, <code>...</code> are passed to it on every call, unchanged.</p></li>
+</ul></div>
     <div class="section level2">
     <h2 id="see-also">See also<a class="anchor" aria-label="anchor" href="#see-also"></a></h2>
     <div class="dont-index"><p><code><a href="map_if.html">map_if()</a></code> for applying a function to only those elements

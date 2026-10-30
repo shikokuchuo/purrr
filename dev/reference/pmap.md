@@ -49,8 +49,6 @@ pwalk(.l, .f, ..., .progress = FALSE)
   - An anonymous function, e.g. `\(x, y, z) x + y / z` or
     `function(x, y, z) x + y / z`
 
-  - A formula, e.g. `~ ..1 + ..2 / ..3`. No longer recommended.
-
   Wrap a function with
   [`in_parallel()`](https://purrr.tidyverse.org/dev/reference/in_parallel.md)
   to declare that it should be performed in parallel. See
@@ -107,6 +105,19 @@ of `.l`. The output type is determined by the suffix:
 
 Any errors thrown by `.f` will be wrapped in an error with class
 [purrr_error_indexed](https://purrr.tidyverse.org/dev/reference/purrr_error_indexed.md).
+
+## Details
+
+`.f` is called once for each element of the vectors in `.l`, as
+`.f(.l[[1]][[1]], .l[[2]][[1]], ...), .f(.l[[1]][[2]], .l[[2]][[2]], ...), ...`.
+
+Note in particular that:
+
+- The vectors in `.l` are subset with `[[`, using the `[[` method if
+  they have one.
+
+- The arguments are supplied by position if the elements of `.l` are
+  unnamed, and by name if they are named.
 
 ## See also
 

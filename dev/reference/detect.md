@@ -24,9 +24,6 @@ detect_index(.x, .f, ..., .dir = c("forward", "backward"))
 
   - An anonymous function, e.g. `\(x) x + 1` or `function(x) x + 1`.
 
-  - A formula, e.g. `~ .x + 1`. Use `.x` to refer to the first argument.
-    No longer recommended.
-
   - A string, integer, or list, e.g. `"idx"`, `1`, or `list("idx", 1)`
     which are shorthand for `\(x) pluck(x, "idx")`, `\(x) pluck(x, 1)`,
     and `\(x) pluck(x, "idx", 1)` respectively. Optionally supply
@@ -52,6 +49,12 @@ detect_index(.x, .f, ..., .dir = c("forward", "backward"))
 `detect` the value of the first item that matches the predicate;
 `detect_index` the position of the matching item. If not found, `detect`
 returns `NULL` and `detect_index` returns 0.
+
+## Details
+
+`.f` is called on each element of `.x` in turn, as `.f(.x[[i]], ...)`,
+stopping at the first element where it returns `TRUE`. `.dir` controls
+whether the search starts at the beginning or the end of `.x`.
 
 ## See also
 

@@ -50,9 +50,6 @@ walk(.x, .f, ..., .progress = FALSE)
 
   - An anonymous function, e.g. `\(x) x + 1` or `function(x) x + 1`.
 
-  - A formula, e.g. `~ .x + 1`. Use `.x` to refer to the first argument.
-    No longer recommended.
-
   - A string, integer, or list, e.g. `"idx"`, `1`, or `list("idx", 1)`
     which are shorthand for `\(x) pluck(x, "idx")`, `\(x) pluck(x, 1)`,
     and `\(x) pluck(x, "idx", 1)` respectively. Optionally supply
@@ -115,6 +112,21 @@ by the suffix:
 
 Any errors thrown by `.f` will be wrapped in an error with class
 [purrr_error_indexed](https://purrr.tidyverse.org/dev/reference/purrr_error_indexed.md).
+
+## Details
+
+`.f` is called once for each element of `.x`, as
+`.f(.x[[1]], ...), .f(.x[[2]], ...), ...`.
+
+Note in particular that:
+
+- `.x` is subset with `[[`, using the `[[` method if `x` has one.
+
+- The names of `.x` are not passed to `.f`. If you need them, use
+  [`imap()`](https://purrr.tidyverse.org/dev/reference/imap.md).
+
+- If `.f` is a function, `...` are passed to it on every call,
+  unchanged.
 
 ## See also
 

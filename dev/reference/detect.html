@@ -73,8 +73,6 @@
 <dt id="arg--f">.f<a class="anchor" aria-label="anchor" href="#arg--f"></a></dt>
 <dd><p>A function, specified in one of the following ways:</p><ul><li><p>A named function, e.g. <code>mean</code>.</p></li>
 <li><p>An anonymous function, e.g. <code>\(x) x + 1</code> or <code>function(x) x + 1</code>.</p></li>
-<li><p>A formula, e.g. <code>~ .x + 1</code>. Use <code>.x</code> to refer to the first argument. No
-longer recommended.</p></li>
 <li><p>A string, integer, or list, e.g. <code>"idx"</code>, <code>1</code>, or <code>list("idx", 1)</code> which
 are shorthand for <code>\(x) pluck(x, "idx")</code>, <code>\(x) pluck(x, 1)</code>, and
 <code>\(x) pluck(x, "idx", 1)</code> respectively. Optionally supply <code>.default</code> to
@@ -102,6 +100,12 @@ the end of the vector and moves towards the beginning.</p></dd>
 predicate; <code>detect_index</code> the position of the matching item.
 If not found, <code>detect</code> returns <code>NULL</code> and <code>detect_index</code>
 returns 0.</p>
+    </div>
+    <div class="section level2">
+    <h2 id="details">Details<a class="anchor" aria-label="anchor" href="#details"></a></h2>
+    <p><code>.f</code> is called on each element of <code>.x</code> in turn, as <code>.f(.x[[i]], ...)</code>,
+stopping at the first element where it returns <code>TRUE</code>. <code>.dir</code> controls
+whether the search starts at the beginning or the end of <code>.x</code>.</p>
     </div>
     <div class="section level2">
     <h2 id="see-also">See also<a class="anchor" aria-label="anchor" href="#see-also"></a></h2>
